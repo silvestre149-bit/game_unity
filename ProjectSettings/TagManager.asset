@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - personagem
+  - Agua
+  - Pontuacao
   layers:
   - Default
   - TransparentFX

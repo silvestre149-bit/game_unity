@@ -3,17 +3,17 @@ using UnityEngine;
 
 public class Serial_Reader : MonoBehaviour
 {
+    public float velocidadeMovimento = 5f;
+
     SerialPort serialPort;
     private GameObject character;
 
     void Start()
     {
-        // Inicializa a porta serial
         serialPort = new SerialPort("/dev/ttyACM0", 9600);
 
         try
         {
-            // Tenta abrir a porta serial
             serialPort.Open();
         }
         catch (System.Exception ex)
@@ -21,10 +21,11 @@ public class Serial_Reader : MonoBehaviour
             Debug.LogError(ex.Message);
         }
 
-        // Encontra o objeto do personagem pelo nome ou por uma tag
-        character = GameObject.Find("personagem"); // Substitua "NomeDoPersonagem" pelo nome real do objeto do personagem
-        // Ou
-        character = GameObject.FindGameObjectWithTag("personagem"); // Substitua "TagDoPersonagem" pela tag real do objeto do personagem
+        character = GameObject.Find("personagem");
+        if (character == null)
+        {
+            character = GameObject.FindGameObjectWithTag("personagem");
+        }
     }
 
     void Update()
@@ -33,17 +34,16 @@ public class Serial_Reader : MonoBehaviour
         {
             try
             {
-                // Lê os dados da porta serial
                 string data = serialPort.ReadLine();
                 Debug.Log(data);
 
                 switch (data.Trim())
                 {
                     case "DIREITA":
-                        character.transform.Translate(Vector3.right * Time.deltaTime);
+                        MoverDireita();
                         break;
                     case "ESQUERDA":
-                        character.transform.Translate(Vector3.left * Time.deltaTime);
+                        MoverEsquerda();
                         break;
                     case "CENTRO":
                         // Não faz nada, personagem permanece parado
@@ -53,7 +53,6 @@ public class Serial_Reader : MonoBehaviour
                         break;
                 }
 
-                // Exibe uma mensagem de sucesso no console do Unity
                 Debug.Log("Dados lidos com sucesso!");
             }
             catch (System.Exception ex)
@@ -61,11 +60,30 @@ public class Serial_Reader : MonoBehaviour
                 Debug.LogError(ex.Message);
             }
         }
+
+        float movimentoHorizontal = Input.GetAxis("Horizontal");
+        if (movimentoHorizontal > 0)
+        {
+            MoverDireita();
+        }
+        else if (movimentoHorizontal < 0)
+        {
+            MoverEsquerda();
+        }
+    }
+
+    void MoverDireita()
+    {
+        character.transform.Translate(Vector3.right * velocidadeMovimento * Time.deltaTime);
+    }
+
+    void MoverEsquerda()
+    {
+        character.transform.Translate(Vector3.left * velocidadeMovimento * Time.deltaTime);
     }
 
     void OnApplicationQuit()
     {
-        // Fecha a porta serial antes de sair do aplicativo
         if (serialPort != null && serialPort.IsOpen)
         {
             serialPort.Close();
