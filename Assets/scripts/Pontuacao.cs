@@ -1,11 +1,19 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Pontuacao : MonoBehaviour
 {
-    public Text pontuacaoText; // Referência ao objeto de texto da pontuação
+    public TextMeshProUGUI pontuacaoText; // Referência ao objeto de texto da pontuação
     private float tempoInicial;
     private bool jogoTerminado = false;
+    public int PontuacaoFinal { get; private set; } // Isso deve ser uma propriedade, não uma variável
+
+
+    public float GetTempoInicial()
+    {
+        return tempoInicial;
+    }
 
     void Start()
     {
@@ -27,12 +35,12 @@ public class Pontuacao : MonoBehaviour
     public void FinalizarJogo()
     {
         jogoTerminado = true;
+        PontuacaoFinal = Mathf.FloorToInt(Time.time - tempoInicial);
         MostrarPontuacao();
     }
 
     void MostrarPontuacao()
     {
-        int pontuacao = Mathf.FloorToInt(Time.time - tempoInicial);
-        Debug.Log("Pontuação: " + pontuacao);
+        Debug.Log("Pontuação: " + PontuacaoFinal);
     }
 }
