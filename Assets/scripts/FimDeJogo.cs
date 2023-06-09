@@ -6,13 +6,18 @@ using TMPro;
 public class FimDeJogo : MonoBehaviour
 {
     public GameObject gameOverUI;
-    public TextMeshProUGUI textoPontuacao;
-    public TextMeshProUGUI textoTempo;
+    public TextMeshProUGUI novoTextoPontuacao;
+    public TextMeshProUGUI novoTextoTempo;
+    public TextMeshProUGUI textoPontuacaoDuranteJogo;
+    public TextMeshProUGUI textoTempoDuranteJogo;
+    public TextMeshProUGUI seuTextoPosicaoRanking;
     private bool jogoTerminado = false;
     private Pontuacao pontuacao;
     public AudioSource audioSource;
     public AudioClip somDeFundo;
     public AudioClip somGameOver;
+
+
 
     void Start()
     {
@@ -23,6 +28,7 @@ public class FimDeJogo : MonoBehaviour
         if (pontuacaoObj != null)
         {
             pontuacao = pontuacaoObj.GetComponent<Pontuacao>();
+            /*Limpar();*/
         }
     }
 
@@ -32,7 +38,6 @@ public class FimDeJogo : MonoBehaviour
         if (collision.CompareTag("Agua") && !jogoTerminado)
         {
             jogoTerminado = true;
-            MostrarGameOver();
             GameObject pontuacaoObj = GameObject.FindGameObjectWithTag("Pontuacao");
             if (pontuacaoObj != null)
             {
@@ -41,6 +46,7 @@ public class FimDeJogo : MonoBehaviour
                 {
                     pontuacao.FinalizarJogo();
                     AtualizarPontuacaoFinal(pontuacao.PontuacaoFinal);
+                    MostrarGameOver();
                 }
                 else
                 {
@@ -61,13 +67,21 @@ public class FimDeJogo : MonoBehaviour
         audioSource.clip = somGameOver;
         audioSource.loop = false;
         audioSource.Play();
+
         if (pontuacaoObj != null)
         {
             Pontuacao pontuacao = pontuacaoObj.GetComponent<Pontuacao>();
             if (pontuacao != null)
             {
-                textoPontuacao.text = "Pontuacao: " + pontuacao.PontuacaoFinal;
-                textoTempo.text = "Tempo: " + Mathf.FloorToInt(Time.time - pontuacao.GetTempoInicial());
+                textoPontuacaoDuranteJogo.enabled = false;
+                textoTempoDuranteJogo.enabled = false;
+                novoTextoPontuacao.enabled = true;
+                novoTextoTempo.enabled = true;
+
+                novoTextoPontuacao.text = "Pontuacao: " + pontuacao.PontuacaoFinal;
+                novoTextoTempo.text = FormatTime(Time.time - pontuacao.GetTempoInicial());
+
+                pontuacao.PrintScores();
             }
             else
             {
@@ -78,19 +92,45 @@ public class FimDeJogo : MonoBehaviour
         {
             Debug.LogWarning("Não há GameObject com a tag 'Pontuacao' na cena.");
         }
+
+        int posicaoRanking = pontuacao.ObterPosicaoRanking();
+        if (posicaoRanking != -1)
+        {
+            // Exiba a posição no ranking na tela. Você precisará adicionar um novo TextMeshProUGUI para isso
+            seuTextoPosicaoRanking.text = "Você ficou na posição: " + posicaoRanking;
+        }
+        else
+        {
+            seuTextoPosicaoRanking.text = "Sua pontuação não foi suficiente para entrar no ranking.";
+        }
+
     }
-
-
     public void AtualizarPontuacaoFinal(int pontuacaoFinal)
     {
-        textoPontuacao.text = "Pontuação: " + pontuacaoFinal;
+        novoTextoPontuacao.text = pontuacaoFinal + " pontos";
     }
 
+    string FormatTime(float timeInSeconds)
+    {
+        int minutes = Mathf.FloorToInt(timeInSeconds / 60);
+        int seconds = Mathf.FloorToInt(timeInSeconds - minutes * 60);
+        string formattedTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+        return formattedTime;
+    }
 
     public void ReiniciarJogo()
     {
         Time.timeScale = 1; // Volta o jogo ao normal
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+    public void IrParaRanking()
+    {
+        PlayerPrefs.SetInt("MostrarRanking", 1); // definindo o sinalizador
+        SceneManager.LoadScene("TelaInicial");
+    }
+    public void Limpar()
+    {
+        pontuacao.LimparClassificacao();
     }
 
     public void Sair()
@@ -98,10 +138,8 @@ public class FimDeJogo : MonoBehaviour
         Time.timeScale = 1; //Volta ao jogo normal
         SceneManager.LoadScene("TelaInicial");
     }
-
     public void AlternarSom()
     {
-    audioSource.mute = !audioSource.mute;
+        audioSource.mute = !audioSource.mute;
     }
-
 }

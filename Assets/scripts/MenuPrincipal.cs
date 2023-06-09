@@ -10,6 +10,8 @@ public class MenuPrincipal : MonoBehaviour
     [SerializeField] private GameObject painelComoJogar;
     [SerializeField] private GameObject painelSobre;
     [SerializeField] private GameObject painelNiveis;
+    [SerializeField] private GameObject painelNome;
+    [SerializeField] private GameObject painelRanking;
 
 
     public void Jogar()
@@ -29,17 +31,40 @@ public class MenuPrincipal : MonoBehaviour
         painelSobre.SetActive(true);
     }
 
+    void Awake()
+    {
+        if (PlayerPrefs.GetInt("MostrarRanking", 0) == 1)
+        {
+            // Resetando o sinalizador
+            PlayerPrefs.SetInt("MostrarRanking", 0);
+
+            // Aqui você pode adicionar o código para abrir a tela de ranking
+            painelMenu.SetActive(false);
+            painelRanking.SetActive(true);
+        }
+    }
+
+
     public void Sair()
     {
         painelSobre.SetActive(false);
         painelNiveis.SetActive(false);
         painelComoJogar.SetActive(false);
-        painelMenu.SetActive(true);   
+        painelRanking.SetActive(false);
+        painelNome.SetActive(false);
+        painelMenu.SetActive(true);
     }
-    
-    public void AbrirNivel(){
+
+    public void AbrirNivel()
+    {
         painelMenu.SetActive(false);
-        painelNiveis.SetActive(true);    
+        painelNiveis.SetActive(true);
+    }
+
+    public void AbrirNome()
+    {
+        painelNiveis.SetActive(false);
+        painelNome.SetActive(true);
     }
 
 }
