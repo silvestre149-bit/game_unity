@@ -206,7 +206,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 46550794}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: CarregarProximoNivel1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &46550794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -463,7 +475,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 194443675}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: ContinuarJogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &194443675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -539,7 +563,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -840, y: 525}
+  m_AnchoredPosition: {x: -840, y: 510}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &236681411
@@ -783,7 +807,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 20
+  m_Mass: 30
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 5
@@ -869,7 +893,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   velocidadeMovimento: 50
-  forcaIceberg: 20
 --- !u!114 &331690224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1205,7 +1228,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 404565963}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: CarregarTelaInicial
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &404565963
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1632,6 +1667,7 @@ GameObject:
   - component: {fileID: 640289106}
   - component: {fileID: 640289105}
   - component: {fileID: 640289104}
+  - component: {fileID: 640289107}
   m_Layer: 5
   m_Name: iceberg
   m_TagString: Iceberg
@@ -1657,7 +1693,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -300}
-  m_SizeDelta: {x: 1205, y: 150}
+  m_SizeDelta: {x: 1000, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &640289102
 MonoBehaviour:
@@ -1712,7 +1748,7 @@ HingeJoint2D:
   m_BreakTorque: Infinity
   m_AutoConfigureConnectedAnchor: 1
   m_Anchor: {x: 0, y: 0}
-  m_ConnectedAnchor: {x: 475, y: 131.19046}
+  m_ConnectedAnchor: {x: 475, y: 128.9695}
   m_UseMotor: 0
   m_Motor:
     m_MotorSpeed: 0
@@ -1741,7 +1777,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 2
 --- !u!61 &640289106
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1755,7 +1791,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 3.579712, y: -28.533987}
+  m_Offset: {x: -5.3207245, y: -13.722954}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1766,8 +1802,21 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1191.8188, y: 82.51559}
+  m_Size: {x: 976.2312, y: 52.893524}
   m_EdgeRadius: 0
+--- !u!114 &640289107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 640289100}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59ca069d72075a08180c94f3406ddd5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  forcaRotacao: 15
 --- !u!1 &680780714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1986,7 +2035,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 735378140}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: AlternarSom
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &735378140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2195,7 +2256,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 875, y: 525}
+  m_AnchoredPosition: {x: 875, y: 510}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &790635585
@@ -2241,7 +2302,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 790635586}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: PausarJogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &790635586
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2711,7 +2784,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 970610771}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: CarregarNivelAnterior1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &970610771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3318,6 +3403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1234324503}
+  - component: {fileID: 1234324504}
   m_Layer: 0
   m_Name: gerenciadorScript
   m_TagString: Untagged
@@ -3340,6 +3426,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1234324504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234324501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4bf980c50cb0e88ab8c0a67d0dc83b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  painelPause: {fileID: 1236491475}
 --- !u!1 &1236491475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3483,7 +3582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -620, y: 525}
+  m_AnchoredPosition: {x: -620, y: 510}
   m_SizeDelta: {x: 200, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273051739
@@ -5041,6 +5140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1803890034}
   - component: {fileID: 1803890035}
+  - component: {fileID: 1803890036}
   m_Layer: 5
   m_Name: Agua
   m_TagString: Agua
@@ -5081,7 +5181,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 201.85034, y: -226.31192}
+  m_Offset: {x: 201.85034, y: -246.03842}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -5092,8 +5192,29 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1909.936, y: 22.997192}
+  m_Size: {x: 1909.936, y: 30.902527}
   m_EdgeRadius: 0
+--- !u!50 &1803890036
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803890033}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &1837096320
 GameObject:
   m_ObjectHideFlags: 0
@@ -5177,7 +5298,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1837096323}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1234324504}
+        m_TargetAssemblyTypeName: Pause, Assembly-CSharp
+        m_MethodName: ReiniciarJogo
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &1837096323
 MonoBehaviour:
   m_ObjectHideFlags: 0

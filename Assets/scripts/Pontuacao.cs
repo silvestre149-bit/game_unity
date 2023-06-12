@@ -15,11 +15,13 @@ public class Pontuacao : MonoBehaviour
     private bool jogoTerminado = false;
 
     public int PontuacaoFinal { get; private set; }
+    private int pontuacaoInicial;
 
     public float GetTempoInicial()
     {
         return tempoInicial;
     }
+
 
     void Start()
     {
@@ -29,18 +31,19 @@ public class Pontuacao : MonoBehaviour
             int duracaoDoJogo = PlayerPrefs.GetInt("TempoJogo");
 
             // Remova a chave para que não afete futuras execuções do jogo
-            PlayerPrefs.DeleteKey("TempoJogo");
+            /*PlayerPrefs.DeleteKey("TempoJogo");*/
 
             // Iniciar o jogo com a duração definida
             IniciarJogo(duracaoDoJogo);
         }
     }
 
+
     public void IniciarJogo(int duracaoDoJogo)
     {
         tempoInicial = Time.time;
-        tempoRestante = duracaoDoJogo;
-        pontuacao = 0;
+        tempoRestante = duracaoDoJogo > 0 ? duracaoDoJogo : 300; // 5 minutos como valor padrão
+        pontuacao = pontuacaoInicial;
         jogoTerminado = false;
         UpdateUI();
     }
@@ -59,7 +62,7 @@ public class Pontuacao : MonoBehaviour
             FinalizarJogo();
         }
 
-        pontuacao = Mathf.FloorToInt((Time.time - tempoInicial) * fatorPontuacao);
+        pontuacao = pontuacaoInicial + Mathf.FloorToInt((Time.time - tempoInicial) * fatorPontuacao);
 
         UpdateUI();
     }
@@ -68,7 +71,7 @@ public class Pontuacao : MonoBehaviour
     public void FinalizarJogo()
     {
         jogoTerminado = true;
-        PontuacaoFinal = Mathf.FloorToInt((Time.time - tempoInicial) * fatorPontuacao);
+        PontuacaoFinal = pontuacao;
         Debug.Log("Pontuação: " + PontuacaoFinal);
         SalvarPontuacaoFinal();
     }
@@ -180,4 +183,3 @@ public class ScoreList
         this.scores = scores;
     }
 }
-

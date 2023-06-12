@@ -4,12 +4,9 @@ using UnityEngine;
 public class Serial_Reader : MonoBehaviour
 {
     public float velocidadeMovimento = 5f;
-    public float forcaIceberg = 10f; // Força que será aplicada ao iceberg
 
     SerialPort serialPort;
     private GameObject character;
-    private GameObject iceberg; // Referência ao iceberg
-    private Rigidbody2D icebergRb; // Rigidbody do iceberg
 
     void Start()
     {
@@ -29,14 +26,6 @@ public class Serial_Reader : MonoBehaviour
         {
             character = GameObject.FindGameObjectWithTag("personagem");
         }
-        
-        iceberg = GameObject.Find("Iceberg");
-        if (iceberg == null)
-        {
-            iceberg = GameObject.FindGameObjectWithTag("Iceberg");
-        }
-        
-        icebergRb = iceberg.GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -86,13 +75,11 @@ public class Serial_Reader : MonoBehaviour
     void MoverDireita()
     {
         character.transform.Translate(Vector3.right * velocidadeMovimento * Time.deltaTime);
-        icebergRb.AddForce(Vector2.left * forcaIceberg); // Adiciona uma força ao iceberg na direção oposta
     }
 
     void MoverEsquerda()
     {
         character.transform.Translate(Vector3.left * velocidadeMovimento * Time.deltaTime);
-        icebergRb.AddForce(Vector2.right * forcaIceberg); // Adiciona uma força ao iceberg na direção oposta
     }
 
     void OnApplicationQuit()

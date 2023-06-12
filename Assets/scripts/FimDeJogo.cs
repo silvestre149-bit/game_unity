@@ -16,6 +16,9 @@ public class FimDeJogo : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip somDeFundo;
     public AudioClip somGameOver;
+    public static int duracaoDoJogo;
+
+
 
 
 
@@ -117,12 +120,16 @@ public class FimDeJogo : MonoBehaviour
         string formattedTime = string.Format("{0:0}:{1:00}", minutes, seconds);
         return formattedTime;
     }
-
     public void ReiniciarJogo()
     {
         Time.timeScale = 1; // Volta o jogo ao normal
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        int duracaoDoJogo = PlayerPrefs.GetInt("TempoJogo");
+        Debug.Log("aqui" + duracaoDoJogo);
+        PlayerPrefs.SetInt("TempoJogo", duracaoDoJogo);// Armazena o tempo do jogo em segundos
+        SceneManager.LoadScene("Jogo");
     }
+
+
     public void IrParaRanking()
     {
         PlayerPrefs.SetInt("MostrarRanking", 1); // definindo o sinalizador

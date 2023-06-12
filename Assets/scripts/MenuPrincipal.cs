@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 public class MenuPrincipal : MonoBehaviour
 {
@@ -12,7 +13,14 @@ public class MenuPrincipal : MonoBehaviour
     [SerializeField] private GameObject painelNiveis;
     [SerializeField] private GameObject painelNome;
     [SerializeField] private GameObject painelRanking;
+    [SerializeField] private GameObject painelSelecaoTempoRanking;
+    [SerializeField] private GameObject painelSelecaoNivelRanking;
+    private ControladorDeInicio controladorDeInicio;
+    private Pontuacao pontuacao;
+    private int nivelSelecionado;
+    private int tempoSelecionado;
 
+    /*private bool mostrarRanking = false;*/
 
     public void Jogar()
     {
@@ -33,17 +41,33 @@ public class MenuPrincipal : MonoBehaviour
 
     void Awake()
     {
+        pontuacao = FindObjectOfType<Pontuacao>();
+        controladorDeInicio = GameObject.FindObjectOfType<ControladorDeInicio>();
         if (PlayerPrefs.GetInt("MostrarRanking", 0) == 1)
         {
-            // Resetando o sinalizador
+            // Resetar o sinalizador
             PlayerPrefs.SetInt("MostrarRanking", 0);
 
-            // Aqui você pode adicionar o código para abrir a tela de ranking
+            // Abrir a tela de seleção de nível no ranking
             painelMenu.SetActive(false);
-            painelRanking.SetActive(true);
+            painelRanking.SetActive(false);
+            painelSelecaoNivelRanking.SetActive(true);
+        }
+        else
+        {
+            painelMenu.SetActive(true);
+            painelNiveis.SetActive(false);
+            painelNome.SetActive(false);
+            painelRanking.SetActive(false);
         }
     }
 
+    public void SelecionarNivelRanking(int nivel)
+    {
+        PlayerPrefs.SetInt("NivelSelecionadoRanking", nivel);
+        painelSelecaoNivelRanking.SetActive(false);
+        painelSelecaoTempoRanking.SetActive(true);
+    }
 
     public void Sair()
     {
@@ -53,7 +77,16 @@ public class MenuPrincipal : MonoBehaviour
         painelRanking.SetActive(false);
         painelNome.SetActive(false);
         painelMenu.SetActive(true);
+        SceneManager.LoadScene("TelaInicial");
     }
+
+    public void SelecionarTempoRanking(int tempo)
+    {
+        PlayerPrefs.SetInt("TempoSelecionadoRanking", tempo);
+        painelSelecaoTempoRanking.SetActive(false);
+        painelRanking.SetActive(true);
+    }
+
 
     public void AbrirNivel()
     {
@@ -65,6 +98,19 @@ public class MenuPrincipal : MonoBehaviour
     {
         painelNiveis.SetActive(false);
         painelNome.SetActive(true);
+       
     }
 
+    public void AbrirRanking()
+    {
+        /*mostrarRanking = true;*/
+        painelMenu.SetActive(false);
+        painelRanking.SetActive(true);
+    }
+
+
 }
+
+
+
+

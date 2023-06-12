@@ -10,6 +10,9 @@ public class ControladorDeInicio : MonoBehaviour
     public Toggle toggle10Minutos;
     public Toggle toggle15Minutos;
 
+    private int nivelSelecionado;
+    public static int tempoJogo;
+
     public void IniciarJogo()
     {
         string nome = campoNome.text;
@@ -21,6 +24,26 @@ public class ControladorDeInicio : MonoBehaviour
         else if (toggle15Minutos.isOn) tempoJogo = 15;
 
         PlayerPrefs.SetInt("TempoJogo", tempoJogo * 60); // Armazena o tempo do jogo em segundos
-        SceneManager.LoadScene("Jogo");
+
+        switch (nivelSelecionado)
+        {
+            case 1:
+                SceneManager.LoadScene("Jogo");
+                break;
+            case 2:
+                SceneManager.LoadScene("Jogo 1");
+                break;
+            case 3:
+                SceneManager.LoadScene("Jogo 2");
+                break;
+            default:
+                Debug.LogError("Nível selecionado inválido!");
+                break;
+        }
+    }
+
+    public void SelecionarNivel(int nivel)
+    {
+        nivelSelecionado = nivel;
     }
 }
