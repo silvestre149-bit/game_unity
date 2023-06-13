@@ -45,5 +45,7 @@ public class ControladorDeInicio : MonoBehaviour
     public void SelecionarNivel(int nivel)
     {
         nivelSelecionado = nivel;
+        PlayerPrefs.SetInt("Nível", nivelSelecionado);
+        /*PlayerPrefs.Save();*/
     }
 }

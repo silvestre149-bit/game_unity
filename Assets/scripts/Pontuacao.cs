@@ -74,6 +74,12 @@ public class Pontuacao : MonoBehaviour
         PontuacaoFinal = pontuacao;
         Debug.Log("Pontuação: " + PontuacaoFinal);
         SalvarPontuacaoFinal();
+
+        /*// Adicionar o código aqui para salvar a pontuação final no PlayerPrefs usando a chave única
+        string chaveUnica = nivelSelecionado.ToString() + "_" + tempoJogo.ToString();
+        int pontuacaoFinal = PontuacaoFinal;
+        PlayerPrefs.SetInt(chaveUnica, pontuacaoFinal);
+        PlayerPrefs.Save();*/
     }
 
 
